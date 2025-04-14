@@ -40,7 +40,7 @@ Note: you can clone the repo and perform other steps, but these are the ones I f
 
 - Open Github Copilot Chat
 - Change Copilot to Agent mode
-- ![alt text](images\agent-mode.png)
+- ![alt text](images/agent-mode.png)
 - On the Agent pane, click on Tools
 - On the topbar popup, click `+ Add More Tools`
 - On the topbar popup, click `+ Add MCP Server`
@@ -68,4 +68,4 @@ Note: you can clone the repo and perform other steps, but these are the ones I f
 
 In the screenshot, we can see that the MCP server is running, and that there are 5 tools registered in VSCode. We can also see that the agent has made to calls to `add` and `notify`.
 
-![Expected Results](![alt text](images\screenshot1.png)
+![alt text](images/screenshot1.png)
