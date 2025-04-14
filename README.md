@@ -66,4 +66,6 @@ Note: you can clone the repo and perform other steps, but these are the ones I f
 
 ## Expected results
 
+In the screenshot, we can see that the MCP server is running, and that there are 5 tools registered in VSCode. We can also see that the agent has made to calls to `add` and `notify`.
+
 ![Expected Results](![alt text](images\screenshot1.png)
