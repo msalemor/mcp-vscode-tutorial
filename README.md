@@ -14,6 +14,9 @@ An MCP (Model Context Protocol) server is a lightweight program designed to expo
 
 Think of MCP servers as bridges that connect LLMs to various data sources and tools, both local and remote. They enable LLMs to access and interact with files, databases, APIs, and other services in a controlled manner. This makes it easier to build complex workflows and integrate AI models with different systems.
 
+References:
+- [Introduction to MCP](https://modelcontextprotocol.io/introduction)
+
 ## MCP Server code
 
 For my testing, I used the following sample code:
