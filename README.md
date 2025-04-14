@@ -4,9 +4,9 @@ A tutorial to build an MCP server and use vscode as an MCP client.
 
 ## Overview
 
-Most MCP tutorials and demos are currently targeting the Claude Desktop application. However, you can also perform development and testing if you have GitHub Copilot with Agent mode. 
+Most MCP tutorials and demos are currently targeting the Claude Desktop application. However, you can also perform development and testing if you have GitHub Copilot with Agent mode and use Visual Studio Code as an MCP client. 
 
-MCP servers are being written in many languages. This demo implements a sample MCP server in Go becuse the build process generates a small executable that requires no additional parameters to run.
+MCP servers are being written in many languages. This demo implements a sample MCP server, from the mcp-go package samples, in Go becuse the build process generates a small executable that requires no additional parameters to run.
 
 ## MCP Server code
 
@@ -24,28 +24,39 @@ For my testing, I used the following sample code:
 
 Note: you can clone the repo and perform other steps, but these are the ones I followed:
 
-- Created a new folder: `mkdir mcpgo1`
-- Created a new Golang module: `go mod init mcpgo1`
-- Created a main file: `touch main.go`
-- Copied the server code into the main.go file
-- Got the required packages: `go mod tidy`
+- Clone this repo
+- Change directory to: `server`
+- Get the required packages: `go mod tidy`
 - Built the mcp server: `go build .`
+- Copy the full executable path: `C:\Users\user\git\msalemor\mcp-vscode-tutorial\server\mcpgo.exe`
 
 ## Deploying the server
 
 - Open Github Copilot Chat
-- Make sure that you are in Agent mode
-- Click on tools
-- Following this steps will create a file like this one:
+- Change Copilot to Agent mode
+- ![alt text](images\agent-mode.png)
+- Click on select tools
+- Click add MCP server
+- Select `Command (stdio)`
+- On the command to run, paste the full path to the Go executable
+- Name the server whatever you want
+- Save the MCP configuration as user (global) or workspace (only for the project) settings
+- If you select workspace, Visual Studio will generate the following settings at `.vscode/mcp.json`
 
 ```json
 {
     "servers": {
         "mcpgo1": {
             "type": "stdio",
-            "command": "D:\\github\\temp\\mcpgo1\\mcpgo1.exe",
+            "command": "C:\\Users\\user\\git\\msalemor\\mcp-vscode-tutorial\\server\\mcpgo.exe",
             "args": []
         }
     }
 }
 ```
+- Start the server
+- VSCode should show 5 tools (if you have not added others)
+
+## Expected results
+
+![Expected Results](![alt text](images\screenshot1.png)
