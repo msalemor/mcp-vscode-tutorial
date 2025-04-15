@@ -28,6 +28,7 @@ For my testing, I used the following sample code:
 
 - Visual Studio Code
 - Github Copilot with Agent mode
+- Some Go knowledge
 
 ## Building the code in Windows
 
