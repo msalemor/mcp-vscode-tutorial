@@ -81,3 +81,24 @@ Note: you can clone the repo and perform other steps, but these are the ones I f
 In the screenshot, we can see that the MCP server is running, and that there are 5 tools registered in VSCode. We can also see that the agent has made to calls to `add` and `notify`.
 
 ![alt text](images/server-running.png)
+
+## Testing in the agent type:
+
+- add 1 + 1
+```text
+I'll help you add 1 + 1 using the available tools in this MCP (Model Context Protocol) server workspace. It looks like you have an "add" tool implemented in your Go server that can handle addition operations.
+
+Let me call the tool to add 1 + 1:
+
+The result of adding 1 + 1 is 2.
+
+I used the "add" tool that's implemented in your MCP server. The server returned: "The sum of 1.000000 and 1.000000 is 2.000000."
+```
+
+- Notify: this is a test
+```text
+I'll help you implement a notification test using the MCP server in your workspace. I see you have a "notify" tool defined but it has an empty description. Let me call this tool to send a notification:
+
+The notification was successfully sent! I used the 9f1_notify tool in your MCP (Model Context Protocol) server, and it returned "notification sent successfully".
+```
+
