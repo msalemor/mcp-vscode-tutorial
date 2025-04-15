@@ -30,7 +30,7 @@ For my testing, I used the following sample code:
 - Github Copilot with Agent mode
 - Some Go knowledge
 
-## Building the code in Windows
+## Building the Go server
 
 Note: you can clone the repo and perform other steps, but these are the ones I followed:
 
@@ -76,6 +76,7 @@ Note: you can clone the repo and perform other steps, but these are the ones I f
 - ![](images/run-server.png)
 - VSCode should show 5 tools (if you have not added others)
 
+
 ## Expected results
 
 In the screenshot, we can see that the MCP server is running, and that there are 5 tools registered in VSCode. We can also see that the agent has made to calls to `add` and `notify`.
@@ -102,3 +103,35 @@ I'll help you implement a notification test using the MCP server in your workspa
 The notification was successfully sent! I used the 9f1_notify tool in your MCP (Model Context Protocol) server, and it returned "notification sent successfully".
 ```
 
+## Node MCP Server
+
+A Node based server was added to the repo, to run the Node MCP server:
+
+- Note that this server run with bun.sh instead of Node.
+- Add another MCP configuraiton to VSCode
+```json
+{
+    "servers": {
+        "mcpgo-server": {
+            "type": "stdio",
+            "command": "C:\\Users\\user\\git\\msalemor\\mcp-vscode-tutorial\\server\\mcpgo.exe",
+            "args": []
+        },
+        "bun-server": {
+            "type": "stdio",
+            "command": "bun",
+            "args": [
+                "run",
+                "C:\\Users\\user\\git\\msalemor\\mcp-vscode-tutorial\\node-server\\index.ts"
+            ]
+        }
+    }
+}
+```
+
+- Make sure that both servers are running
+- ![Both servers running](images/servers-running.png)
+
+### Result
+
+![Results from both servers](images/both-servers-results.png)
