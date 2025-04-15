@@ -43,11 +43,18 @@ Note: you can clone the repo and perform other steps, but these are the ones I f
 
 - Open Github Copilot Chat
 - Change Copilot to Agent mode
-- ![alt text](images/agent-mode.png)
+- ![](images/agent-mode.png)
+
 - On the Agent pane, click on Tools
 - On the topbar popup, click `+ Add More Tools`
+- ![](images/add-more.png)
+
 - On the topbar popup, click `+ Add MCP Server`
+- ![](images/add-mcp-server.png)
+
 - On the topbar popup, select `Command (stdio)`
+- ![](images/commad-stdio.png)
+
 - On the command to run, paste the full path to the Go executable
 - Name the server whatever you want
 - Save the MCP configuration as user (global) or workspace (only for the project) settings
@@ -65,10 +72,11 @@ Note: you can clone the repo and perform other steps, but these are the ones I f
 }
 ```
 - Start the server
+- ![](images/run-server.png)
 - VSCode should show 5 tools (if you have not added others)
 
 ## Expected results
 
 In the screenshot, we can see that the MCP server is running, and that there are 5 tools registered in VSCode. We can also see that the agent has made to calls to `add` and `notify`.
 
-![alt text](images/screenshot1.png)
+![alt text](images/server-running.png)
