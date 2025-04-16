@@ -134,4 +134,6 @@ A Node based server was added to the repo, to run the Node MCP server:
 
 ### Result
 
-![Results from both servers](images/both-servers-results.png)
+- Query: `Get the table schema for users. Create a structure based on the schema. Notify the user when done.`
+
+![Results from both servers](images/both-servers-results-1.png)
