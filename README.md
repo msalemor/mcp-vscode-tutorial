@@ -125,7 +125,8 @@ In the screenshot, we can see that the MCP servers are running, and that there a
 
 ### Sample query and results
 
-- Query: `Get the table schema for users. Create a structure based on the schema. Notify the user when done.`
+- On the Agent window type: `Get the table schema for users. Create a structure based on the schema. Notify the user when done.`
+- Press Enter
 
 #### Results
 
