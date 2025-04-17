@@ -1,12 +1,12 @@
-# MCP Server - VSCode Tutorial
+# MCP Servers - VSCode Tutorial
 
-A tutorial to build an MCP server and use Visual Studio Code as an MCP client.
+A tutorial to build a Go and deploy and MCP server and, deploy a Node one and use Visual Studio Code as an MCP client.
 
 ## Overview
 
 As of 04/2025, most MCP tutorials and demos are currently targeting the Claude Desktop application. However, you can also perform development and testing if you have GitHub Copilot with Agent mode and use Visual Studio Code as an MCP client. 
 
-MCP servers are being written in many languages. This demo implements a sample MCP server, from the mcp-go package samples, in Go becuse the build process generates a high performant, low resource, and small executable that requires no additional parameters to run. MCP servers can be written in languages like Node, Python, and others.
+MCP servers are being written in many languages. This guide implements two MCP servers. One in Go and another in Node (bun.sh). The Go MCP server is based on the mcp-go package, and the Go server is based on one of the samples in package's repo. The Node package is something that I am developing to get table schemas.
 
 ## What is an MCP Server
 
@@ -17,22 +17,24 @@ Think of MCP servers as bridges that connect LLMs to various data sources and to
 References:
 - [Introduction to MCP](https://modelcontextprotocol.io/introduction)
 
-## MCP Server code
+## Requirements
 
+- Visual Studio Code
+- Github Copilot with Agent mode
+- Some Go knowledge and Go installed
+- Some Node knowledge (or bun.sh) and Node or bun installed
+
+## Building and deploying the servers in Windows
+
+### Building the Go server
+
+#### MCP Go package
 For my testing, I used the following sample code:
 
 - Go package: `mcp-go`
 - Server code: [mcp-go/examples/everything](https://github.com/mark3labs/mcp-go/blob/main/examples/everything/main.go)
 
-## Requirements
-
-- Visual Studio Code
-- Github Copilot with Agent mode
-- Some Go knowledge
-
-## Building the Go server
-
-Note: you can clone the repo and perform other steps, but these are the ones I followed:
+#### Building the Go server
 
 - Clone this repo
 - Change directory to: `server`
@@ -40,7 +42,7 @@ Note: you can clone the repo and perform other steps, but these are the ones I f
 - Built the mcp server: `go build .`
 - Copy the full executable path: `C:\Users\user\git\msalemor\mcp-vscode-tutorial\server\mcpgo.exe`
 
-## Deploying the server
+### Deploy the Go server
 
 - Open Github Copilot Chat
 - Change Copilot to Agent mode
@@ -76,39 +78,11 @@ Note: you can clone the repo and perform other steps, but these are the ones I f
 - ![](images/run-server.png)
 - VSCode should show 5 tools (if you have not added others)
 
+## Deploy the Node Server
 
-## Expected results
-
-In the screenshot, we can see that the MCP server is running, and that there are 5 tools registered in VSCode. We can also see that the agent has made to calls to `add` and `notify`.
-
-![alt text](images/server-running.png)
-
-## Testing in the agent type:
-
-- add 1 + 1
-```text
-I'll help you add 1 + 1 using the available tools in this MCP (Model Context Protocol) server workspace. It looks like you have an "add" tool implemented in your Go server that can handle addition operations.
-
-Let me call the tool to add 1 + 1:
-
-The result of adding 1 + 1 is 2.
-
-I used the "add" tool that's implemented in your MCP server. The server returned: "The sum of 1.000000 and 1.000000 is 2.000000."
-```
-
-- Notify: this is a test
-```text
-I'll help you implement a notification test using the MCP server in your workspace. I see you have a "notify" tool defined but it has an empty description. Let me call this tool to send a notification:
-
-The notification was successfully sent! I used the 9f1_notify tool in your MCP (Model Context Protocol) server, and it returned "notification sent successfully".
-```
-
-## Node MCP Server
-
-A Node based server was added to the repo, to run the Node MCP server:
-
-- Note that this server run with bun.sh instead of Node.
-- Add another MCP configuraiton to VSCode
+- Open the `.vscode/mcp.json` file
+- Add the Node `bun-server` MCP configuration as below:
+- >Note: I am using bun.sh instead of node
 ```json
 {
     "servers": {
@@ -119,7 +93,7 @@ A Node based server was added to the repo, to run the Node MCP server:
         },
         "bun-server": {
             "type": "stdio",
-            "command": "bun",
+            "command": "bun", // change to Node if using node
             "args": [
                 "run",
                 "C:\\Users\\user\\git\\msalemor\\mcp-vscode-tutorial\\node-server\\index.ts"
@@ -128,12 +102,31 @@ A Node based server was added to the repo, to run the Node MCP server:
     }
 }
 ```
+## Running the servers
 
 - Make sure that both servers are running
-- ![Both servers running](images/servers-running.png)
+- ![Status srvers running in the MCP configuration](images/servers-running.png)
+- If they are not running, click on start
 
-### Result
+## Testing the servers
+
+- Create a file called: `types.go`
+- Make sure the file is the Agent context
+- In the agent type: `Get the table schema for users. Create a structure for the schema. Notify the user when done.`
+
+## Expected results
+
+### Servers running
+
+In the screenshot, we can see that the MCP servers are running, and that there are 6 tools registered in VSCode. We can also see that the Agent has used two tools to create a Go `types.go` file that is based on the `users` schema.
+
+![Screenshot of servers running](images/server-run-results.png)
+
+
+### Sample query and results
 
 - Query: `Get the table schema for users. Create a structure based on the schema. Notify the user when done.`
+
+#### Results
 
 ![Results from both servers](images/both-servers-results-1.png)
