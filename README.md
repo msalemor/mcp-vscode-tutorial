@@ -93,7 +93,7 @@ For my testing, I used the following sample code:
         },
         "bun-server": {
             "type": "stdio",
-            "command": "bun", // change to Node if using node
+            "command": "bun", // change to Node if using node and do not add this comment
             "args": [
                 "run",
                 "C:\\Users\\user\\git\\msalemor\\mcp-vscode-tutorial\\node-server\\index.ts"
