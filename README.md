@@ -1,4 +1,4 @@
-# MCP Servers - VSCode Tutorial
+# Tutorial: Running two MCP Servers in Visual Studio Code
 
 A tutorial to build a Go and deploy and MCP server and, deploy a Node one and use Visual Studio Code as an MCP client.
 
