@@ -1,0 +1,18 @@
+[
+    {
+        "table": "Employees",
+        "cluster": "help",
+        "database": "SecurityLogs",
+        "schema": null,
+        "schemaCmd": "Employees | getschema",
+        "description": "Schema for employee data"
+    },
+    {
+        "table": "Email",
+        "cluster": "help",
+        "database": "SecurityLogs",
+        "schema": null,
+        "schemaCmd": "Email | getschema",
+        "description": "Schema for employee data"
+    }
+]

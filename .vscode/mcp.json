@@ -1,0 +1,14 @@
+{
+    "servers": {
+        "py-server": {
+            "type": "stdio",
+            "command": "uv",
+            "args": [
+                "--directory",
+                "/home/alex/github/msalemor/mcp-vscode-tutorial/py-server",
+                "run",
+                "pyserver.py"
+            ]
+        }
+    }
+}
