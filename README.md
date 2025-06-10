@@ -40,7 +40,7 @@ For my testing, I used the following sample code:
 - Change directory to: `server`
 - Get the required packages: `go mod tidy`
 - Built the mcp server: `go build .`
-- Copy the full executable path: `C:\Users\user\git\msalemor\mcp-vscode-tutorial\server\mcpgo.exe`
+- Copy the full executable path: `C:\Users\user\git\msalemor\mcp-vscode-tutorial\go-server\mcpgo.exe`
 
 ### Deploy the Go server
 
@@ -68,7 +68,7 @@ For my testing, I used the following sample code:
     "servers": {
         "mcpgo1": {
             "type": "stdio",
-            "command": "C:\\Users\\user\\git\\msalemor\\mcp-vscode-tutorial\\server\\mcpgo.exe",
+            "command": "C:\\Users\\user\\git\\msalemor\\mcp-vscode-tutorial\\go-server\\mcpgo.exe",
             "args": []
         }
     }
@@ -88,7 +88,7 @@ For my testing, I used the following sample code:
     "servers": {
         "mcpgo-server": {
             "type": "stdio",
-            "command": "C:\\Users\\user\\git\\msalemor\\mcp-vscode-tutorial\\server\\mcpgo.exe",
+            "command": "C:\\Users\\user\\git\\msalemor\\mcp-vscode-tutorial\\go-server\\mcpgo.exe",
             "args": []
         },
         "bun-server": {
