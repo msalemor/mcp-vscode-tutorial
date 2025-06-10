@@ -7,7 +7,9 @@
                 "--directory",
                 "/home/alex/github/msalemor/mcp-vscode-tutorial/py-server",
                 "run",
-                "pyserver.py"
+                "python",
+                "-m",
+                "pyserver"
             ]
         }
     }
