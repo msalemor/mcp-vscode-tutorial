@@ -1,11 +1,10 @@
 import mcp.types as types
 from mcp.shared._httpx_utils import create_mcp_http_client
 
+
 async def fetch_website(
     url: str,
-) -> list[
-    types.TextContent | types.ImageContent | types.EmbeddedResource
-]:
+) -> list[types.TextContent | types.ImageContent | types.EmbeddedResource]:
     headers = {
         "User-Agent": "MCP Test Server (github.com/modelcontextprotocol/python-sdk)"
     }

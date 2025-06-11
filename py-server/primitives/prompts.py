@@ -1,6 +1,7 @@
 from mcp.server.lowlevel import Server
 import mcp.types as types
 
+
 def create_messages(
     context: str | None = None, topic: str | None = None
 ) -> list[types.PromptMessage]:
@@ -33,7 +34,8 @@ def create_messages(
 
     return messages
 
-def configure_prompts(app: Server)-> None:
+
+def configure_prompts(app: Server) -> None:
     @app.list_prompts()
     async def list_prompts() -> list[types.Prompt]:
         return [

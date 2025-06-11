@@ -8,7 +8,8 @@ SAMPLE_RESOURCES = {
     "about": "This is the simple-resource MCP server implementation.",
 }
 
-def configure_resources(app)->None:
+
+def configure_resources(app) -> None:
     @app.list_resources()
     async def list_resources() -> list[types.Resource]:
         return [
