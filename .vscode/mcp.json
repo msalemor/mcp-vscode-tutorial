@@ -9,7 +9,7 @@
                 "run",
                 "python",
                 "-m",
-                "pyserver"
+                "pymcpserver"
             ]
         }
     }

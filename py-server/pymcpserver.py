@@ -18,7 +18,7 @@ from primitives.resources import configure_resources
     help="Transport type",
 )
 def main(port: int, transport: str) -> int:
-    app: Server = Server("mcp-server")
+    app: Server = Server("py-mcp-server")
 
     configure_tools(app)
     configure_prompts(app)
