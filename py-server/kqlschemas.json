@@ -1,18 +1,34 @@
 [
     {
-        "table": "Employees",
-        "cluster": "help",
-        "database": "SecurityLogs",
-        "schema": null,
-        "schemaCmd": "Employees | getschema",
-        "description": "Schema for employee data"
+        "type": "schema",
+        "key": "Employees",
+        "data": {
+            "cluster": "help",
+            "database": "SecurityLogs",
+            "schema": null,
+            "schemaCmd": "Employees | getschema",
+            "description": "Schema for employee data"
+        }
     },
     {
-        "table": "Email",
-        "cluster": "help",
-        "database": "SecurityLogs",
-        "schema": null,
-        "schemaCmd": "Email | getschema",
-        "description": "Schema for employee data"
+        "type": "schema",
+        "key": "Email",
+        "data": {
+            "cluster": "help",
+            "database": "SecurityLogs",
+            "schema": null,
+            "schemaCmd": "Email | getschema",
+            "description": "Schema for employee data"
+        }
+    },
+    {
+        "type": "query",
+        "key": "employeeroles",
+        "data": {
+            "cluster": "help",
+            "database": "SecurityLogs",
+            "queryCmd": "Employees | where role=='<parameter>' | project name,username,email_addr,hostname;",
+            "description": "Query to filter employees by role"
+        }
     }
 ]

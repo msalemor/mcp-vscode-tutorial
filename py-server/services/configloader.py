@@ -1,88 +1,84 @@
 import json
-from dataclasses import dataclass, field
-from typing import List, Optional
+import os
+from threading import Lock
+from dataclasses import dataclass
+from typing import Optional, Any, List
 
 @dataclass
-class SchemaConfig:
-    """Class representing a schema configuration."""
-    table: str
+class SchemaData:
     cluster: str
     database: str
-    schema: str = None
-    schema_cmd: str = field(default="")
-    description: str = ""
+    schema: Optional[Any]
+    schemaCmd: str
+    description: str
 
-    def __post_init__(self):
-        # Convert camelCase to snake_case for schema_cmd if provided as schemaCmd
-        if not self.schema_cmd and hasattr(self, 'schemaCmd'):
-            self.schema_cmd = getattr(self, 'schemaCmd')
-            delattr(self, 'schemaCmd')
+@dataclass
+class QueryData:
+    cluster: str
+    database: str
+    queryCmd: str
+    description: str
 
+@dataclass
+class KQLSchema:
+    type: str
+    key: str
+    data: SchemaData | QueryData
 
-class SchemaConfigLoader:
-    """Class to load and manage schema configurations."""
+class ConfigLoader:
+    _instance = None
+    _lock = Lock()
+    _data = None
 
-    def __init__(self, config_path: str = './kqlschemas.json'):
-        self.configs: List[SchemaConfig] = []
-        if config_path:
-            self.load_from_file(config_path)
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            with cls._lock:
+                if not cls._instance:
+                    cls._instance = super(ConfigLoader, cls).__new__(cls)
+        return cls._instance
 
-    def load_from_file(self, file_path: str) -> List[SchemaConfig]:
-        """Load configurations from a JSON file."""
+    def __init__(self, config_path='./kqlschemas.json'):
+        if self._data is None:
+            with open(config_path, 'r') as f:
+                content = f.read()                
+                raw_data = json.loads(content)
+                self._data = [self._parse_item(item) for item in raw_data]
+
+    def _parse_item(self, item):
+        if item['type'] == 'schema':
+            data = SchemaData(**item['data'])
+        elif item['type'] == 'query':
+            data = QueryData(**item['data'])
+        else:
+            data = item['data']
+        return KQLSchema(type=item['type'], key=item['key'], data=data)
+
+    def get_by_key(self, key)->SchemaData | None:
         try:
-            with open(file_path, 'r') as file:
-                data = json.load(file)
-                return self.load_from_data(data)
-        except (json.JSONDecodeError, FileNotFoundError) as e:
-            raise ValueError(f"Error loading configuration file: {e}")
-
-    def load_from_data(self, data: List[dict]) -> List[SchemaConfig]:
-        """Load configurations from a list of dictionaries."""
-        self.configs = [SchemaConfigLoader._create_config(config_dict) for config_dict in data]
-        return self.configs
-
-    def load_from_json_string(self, json_str: str) -> List[SchemaConfig]:
-        """Load configurations from a JSON string."""
-        try:
-            data = json.loads(json_str)
-            return self.load_from_data(data)
-        except json.JSONDecodeError as e:
-            raise ValueError(f"Error parsing JSON string: {e}")
-
-    @staticmethod
-    def _create_config(config_dict: dict) -> SchemaConfig:
-        """Create a SchemaConfig instance from a dictionary."""
-        # Handle field name differences between JSON and Python conventions
-        if 'schemaCmd' in config_dict:
-            config_dict['schema_cmd'] = config_dict.pop('schemaCmd')
+            return [item for item in self._data if item.key == key][0]
+        except Exception as e:
+            print(f"Error retrieving item by key '{key}': {e}")
+            return None
         
-        return SchemaConfig(**config_dict)
-
-    def get_configs_by_name(self, name: str) -> SchemaConfig:
-        """Get all configurations with the specified name."""
+    def get_by_type_key(self, type:str, key:str)->SchemaData | None:
         try:
-            return [config for config in self.configs if config.table == name][0]
-        except IndexError:
+            return [item for item in self._data if item.type==type and item.key == key][0]
+        except Exception as e:
+            print(f"Error retrieving item by key '{key}': {e}")
             return None
 
-    def get_all_configs(self) -> List[SchemaConfig]:
-        """Get all loaded configurations."""
-        return self.configs
 
-# Singleton implementation for SchemaConfigLoader
-class SchemaConfigsSingleton:
-    """Singleton class for SchemaConfigLoader."""
-    
-    _instance = None
-    
-    @classmethod
-    def get_instance(cls, config_path: str = './kqlschemas.json') -> SchemaConfigLoader:
-        """Get or create the singleton instance of SchemaConfigLoader."""
-        if cls._instance is None:
-            cls._instance = SchemaConfigLoader(config_path)
-        return cls._instance
-    
-    @classmethod
-    def reset_instance(cls):
-        """Reset the singleton instance (mainly for testing purposes)."""
-        cls._instance = None
+    def get_first_by_key(self, key):
+        for item in self._data:
+            if item.key == key:
+                return item
+        return None
+
+_config_loader_instance = None
+
+def get_config_loader(config_path=None):
+    global _config_loader_instance
+    if _config_loader_instance is None:
+        _config_loader_instance = ConfigLoader(config_path)
+    return _config_loader_instance
+
