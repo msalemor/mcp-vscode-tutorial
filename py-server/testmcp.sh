@@ -4,4 +4,4 @@ npx @modelcontextprotocol/inspector \
   run \
   python \
   -m \
-  pyserver
+  pymcpserver

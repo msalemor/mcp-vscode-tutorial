@@ -10,7 +10,8 @@
                 "python",
                 "-m",
                 "pymcpserver"
-            ]
+            ],
+            "cwd": "${workspaceFolder}"
         }
     }
 }
